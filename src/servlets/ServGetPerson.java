@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ServGetPerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String dbname = "D:/Work/Projects_Java/HelpChildren/test.db";
+	
 	// SQLite connection string
 	private static final String url = "jdbc:sqlite:" + dbname;
 
@@ -33,7 +35,8 @@ public class ServGetPerson extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	private static Connection connect() {
+	private Connection connect() throws MalformedURLException {
+		String url = "jdbc:sqlite:" + this.getServletContext().getRealPath("/WEB-INF/test.db");
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url);
@@ -65,7 +68,7 @@ public class ServGetPerson extends HttpServlet {
 				person.link = rs.getString("link");
 				person.picture = rs.getBytes("picture");
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | MalformedURLException e) {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
