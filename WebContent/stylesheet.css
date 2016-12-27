@@ -1,0 +1,226 @@
+
+
+.header {
+	background: #edf5e1;
+    border-bottom: solid 2px #c4df9b;
+	text-align: center;
+	font-family: "Comic Sans MS", Arial, Helvetica, sans-serif;
+	font-size: large;
+  	color: navy;
+    padding: 10px 20px 2px;
+}
+.footer {
+	background: #edf5e1;
+    padding: 10px;
+    position: fixed;
+    left: 0; bottom: 0; /* Левый нижний угол */
+    width: 100%; /* Ширина слоя */
+    border-top: solid 2px #c4df9b;
+}
+.tablehead {
+	background: #edf5e1;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: teal;
+	line-height: normal;
+ 	margin-left: 10px;
+}
+.tabletxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+ 	margin-left: 10px;
+}
+
+.copyright {
+	text-align: left;
+	text-indent: 11pt;
+	text-decoration:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+
+.paneold {
+    background: #edf5e1;
+    padding: 10px 20px 10px;
+    position: relative;
+    border-top: solid 2px #c4df9b;
+}
+.pane .delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+body {
+	background-color: #EDF2EC;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+
+.input {
+	border-width: 0px; /* Толщина границы */
+}
+.razdel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #6C7A4C;
+}
+
+
+a
+{
+color: #4F5Cff;
+text-decoration:none;
+}
+
+
+a:visited {
+text-decoration:none;
+color: #4F5Cff;
+}
+
+a:hover {
+text-decoration:underline;
+}
+
+
+a.menu
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+color: #7C8E5C
+}
+a.menu:link {text-decoration:none;
+color: #7C8E5C}
+
+a.menu:visited {
+text-decoration:none;
+color: #7C8E5C
+}
+
+a.menu:hover {
+text-decoration:underline;
+}
+
+a.menub{
+font-family: Arial, Helvetica, sans-serif;
+color: #000000;
+font-weight: bold;
+font-size: 12px;
+}
+a.menub:hover {
+color: #000000;
+text-decoration:underline;
+}
+a.menub:visited {
+color: #000000;
+}
+
+.rules {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: green;
+	padding: 10px;
+    border-bottom: solid 2px #c4df9b;
+}
+
+.intro {
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: navy;
+	padding: 50px;
+}
+
+.greentext {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: green;
+}
+
+p.headcomment {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: green;
+}
+
+p.newsd {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+        font-weight: bold;
+	margin-left: 10px;
+}
+
+
+p.topmenu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: white;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+p.copyright {
+	text-align: left;
+	text-indent: 11pt;
+	text-decoration:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+hr{
+color: #B4C2AC;
+}
+
+
+h1{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 26px;
+
+margin-left: 40px;
+
+}
+
+h2{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 20px;
+
+}
+
+h3{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 18px;
+
+}
+
+h4{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 16px;
+
+}
+
+div.maintext {
+text-align: justify;
+}
+
+pre{
+color: #0000ff;
+background-color: #DDEEDD;
+	margin-top: 3px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px
+}
+code{
+color: #0000ff;
+}
