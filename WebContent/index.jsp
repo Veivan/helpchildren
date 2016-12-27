@@ -1,39 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="servlets.Person"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" href="stylesheet.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Geokot</title>
-<script type='text/javascript' src='jquery-1.11.2.js'></script>
-<script type='text/javascript' src='jquery-1.11.2.js'></script>
-<script type="text/javascript" src="app.js"></script>
-<!--script type="text/javascript">
-    $(document).ready(
-            function() { // When the HTML DOM is ready loading, then execute the following function...
-                //alert("qq");
-                var $select = $('#countryid'); // Locate HTML DOM element with ID "countryid".
-                //$select.find('#countryid').remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                $('<option>').val("1").text("qq1").appendTo($select);
-                
-                // $('#countryid').append($("<option></option>").attr("value",key).text(value));
-                // $('#countryid').append($("<option/>") .val(key) .text(value));               
-                $('#countryid').append($("<option/>") .val("10") .text("qq10"));               
-                alert("qq2");
-                $.get('querycountries', function(responselist) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-               //     var items = responselist;
-               //     for ( var i = 0; i < items.length; i++) {
-               //         $('<option>').val(items[i]).text(items[i])
-               //                 .appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
-               //     }
-                }
-                return false;
-            });
-</script-->
-</head>
+<title>HelpChildren</title>
 
+</head>
 <body>
 	<div class="header">Geokot
 		<p class="headcomment">
-			Здесь можно получать списки аккаунтов Твиттера по заданным критериям
+			HelpChildren
 		</p>
 	</div>
 
@@ -43,12 +22,12 @@
 		<br/>
 		Пользуйтесь!
 	</div>
+	<a href="start.jsp">домой</a>
 
 <!-- Передача через html -->
-<form method=get action=queryHTags> 
-	<div align="left">
+<form action=queryaccounts method=get> 
 	<br/>
-	<table border = 1>
+	<table border = 0>
 		<tr>
 			<td>Перечень хэштэгов:</td><td></td><td></td>
 			<td colspan=3><input class='input' type='text' name='taglist' /> 
@@ -86,7 +65,7 @@
 		<tr>
 			<td>Возраст аккаунта:</td><td></td><td></td>
 			<td colspan=3>
-				<select name='created_at' class='input'>
+				<select name='created_at' class='input' style="width: 300px;">
    					<option value="0" selected>Не важно</option>
  					<option value="1">менее 1 месяца</option>
   					<option value="2">более 1 месяца</option>
@@ -99,7 +78,7 @@
 		<tr>
 			<td>Дата последнего твита:</td><td></td><td></td>
 			<td colspan=3>
-				<select name='lasttweet_at' class='input'>
+				<select name='lasttweet_at' class='input' style="width: 300px;">
    					<option value="0" selected>Не важно</option>
  					<option value="1">менее двух недель назад</option>
   					<option value="2">от двух недель до месяца назад</option>
@@ -115,29 +94,36 @@
 			<td colspan=3><input class='input' type='text' name='location' /> 
 		</tr>
 		<tr>
+			<td>Учитывать расположение из твитов:</td> 
+			<td><input class='input' type="checkbox" name='geo_enabled'></td>
+		<tr>
+			<td>Страна:</td><td></td><td></td>
+			<td>
+				<select id='countryid' name='id_cn' class='input' style="width: 300px;">
+				</select>
+			</td>
+			<td>Место:</td> 
+			<td colspan=2><input class='input' type='text' name='place' /> 
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+		<tr>
 			<td class=trtwo align="right"><input class='input' type='submit' value="Запрос" /> 
 			<td></td>
 			<td class=trone colspan=4><input class='input' type='reset' value="Очистить" /> 
 		</tr>
 	</table>
-	</div>
-	<select id='countryid' name='countrysel' class='input' style="width: 300px;">
-		<option value="0">Не важно</option>
-	</select>
-	<!--form action="order" method="post">
-	    <select name="productId">
-	        <c:forEach items="${products}" var="product">
-	            <option value="${product.id}">${product.name}</option>
-	        </c:forEach>
-	    </select>
-	    <input type="submit" value="Order" />
-	</form-->
+
 </form>
-	<div class="footer">
-		<p class="copyright">
-			<a href="http://veivan.ucoz.ru/">Aniva Soft</a> &copy; 2015
-		</p>
-		<!-- img src="delete.png" alt="delete" class="delete" /-->
+	<div class="footer">	
+		<table class="copyright">
+			<tr>
+				<td><a href="mailto:AnivaSoft@yandex.ru" title="Aniva Soft e-mail">Aniva Soft</a> &copy; 2015</td>
+				<td><br /></td>
+				<td align="right">Помощь проекту __.</td>
+			</tr>
+		</table>		
 	</div>
 </body>
 </html>
