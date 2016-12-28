@@ -111,7 +111,7 @@ public class ServGetPerson extends HttpServlet {
 		Person person = queryPersonByID(Integer.parseInt(paramValue));
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();		
 		out.println("<html> <link rel='stylesheet' href='stylesheet.css'><head><title>Фонд 'Подари жизнь'</title></head>" +
 "<body>"+ 
 "<p><a href='https://podari-zhizn.ru'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/logo.png' alt='' title=''></a></p>"+
@@ -150,4 +150,85 @@ public class ServGetPerson extends HttpServlet {
 		+ "</div></body></html>" );
 	}
 
+	private String GetCSS()
+	{
+		return "<style='text/css'>{"
+		+ "body { " +								
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	margin-left: 30px;
+}
+
+hr{
+ border: none; 
+    background-color: #658ca1; 
+    color: #658ca1; 
+    height: 1px; 
+    }
+
+.node-title{border:none;margin:0;padding-bottom:0;margin-left:30px;padding-top:10px;
+    font-size: 20px;font-family: Century Gothic,sans-serif;color: #658ca1;
+}
+
+.intro table {
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #626262;
+	padding: 30px;
+}
+    
+.intro th {
+	    font-weight: normal;	    
+}
+    
+.intro td {
+	    font-weight: bold;	    
+}
+    
+a
+{
+	color: #4F5Cff;
+	text-decoration:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
+
+a:visited {
+	text-decoration:none;
+	color: #4F5Cff;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+   
+.abold {
+	font-family: Helvetica;
+	font-size: 18px;
+	font-weight: bold;	
+	font-style: italic;    	
+}
+
+.abutton {
+	font-family: Helvetica;
+	font-size: 15px;
+	font-weight: bold;	
+	font-style: italic;    	
+}
+
+.footer-info{
+	color: #a1a0a0;
+    font-size: 12px;
+}
+
+.footer-info a{
+	color: navy;
+    font-size: 12px;
+	text-decoration:underline;
+}
+"
+		+ "}</style>";
+	}
 }
