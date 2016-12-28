@@ -35,7 +35,8 @@ public class ServGetPerson extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Connection connect() throws MalformedURLException {
+	private Connection connect() throws MalformedURLException, ClassNotFoundException {
+		Class.forName("org.sqlite.JDBC");
 		String url = "jdbc:sqlite:" + this.getServletContext().getRealPath("/WEB-INF/test.db");
 		Connection conn = null;
 		try {
@@ -68,7 +69,7 @@ public class ServGetPerson extends HttpServlet {
 				person.link = rs.getString("link");
 				person.picture = rs.getBytes("picture");
 			}
-		} catch (SQLException | MalformedURLException e) {
+		} catch (SQLException | MalformedURLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
@@ -105,7 +106,8 @@ public class ServGetPerson extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String paramName = "id";
 		String paramValue = request.getParameter(paramName);
-		String name = queryPersonByID(27897).name; 
+		if (paramValue == null) paramValue = "27897";
+		String name = queryPersonByID(Integer.parseInt(paramValue)).name; 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
