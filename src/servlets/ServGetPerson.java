@@ -110,11 +110,22 @@ public class ServGetPerson extends HttpServlet {
 		String name = queryPersonByID(Integer.parseInt(paramValue)).name; 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<html>");
+		out.println("<html>" +		
+			"<link rel=\"stylesheet\" href=\"stylesheet.css\">" + 
+			"<link rel=\"css_1\" href=\"css_1.css\">" + 
+			"<link rel=\"css_2\" href=\"css_2.css\">" + 
+			"<link rel=\"css_3\" href=\"css_3.css\">"  
+				);
+
 		out.println("<head>");
-		out.println("<title>Hello World!</title>");
+		out.println("<title>Фонд \"Подари жизнь\"</title>");
 		out.println("</head>");
+		
 		out.println("<body>");
+		out.println(
+		"<div class=\"node node-child\">" +
+	      "<h1 class=\"node-title\"> Полина  Асеева </h1>	  </div> " );
+
 		out.println("<h1>Hello World!</h1>");
 		out.println(paramValue + " : " +  name);
 		out.println("</body>");
