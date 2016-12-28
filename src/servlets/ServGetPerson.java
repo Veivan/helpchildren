@@ -22,10 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = { "/ServGetPerson" }, initParams = { @WebInitParam(name = "id", value = "") })
 public class ServGetPerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String dbname = "D:/Work/Projects_Java/HelpChildren/test.db";
-	
-	// SQLite connection string
-	private static final String url = "jdbc:sqlite:" + dbname;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -35,9 +31,11 @@ public class ServGetPerson extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Connection connect() throws MalformedURLException, ClassNotFoundException {
+	private Connection connect() throws MalformedURLException,
+			ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
-		String url = "jdbc:sqlite:" + this.getServletContext().getRealPath("/WEB-INF/test.db");
+		String url = "jdbc:sqlite:"
+				+ this.getServletContext().getRealPath("/WEB-INF/test.db");
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url);
@@ -58,17 +56,20 @@ public class ServGetPerson extends HttpServlet {
 			rs = pstmt.executeQuery();
 			// loop through the result set
 			while (rs.next()) {
-				/*System.out.println(rs.getInt("id") + "\t"
-						+ rs.getString("name") + "\t" + rs.getString("summ")
-						// + "\t" + rs.getString("picture") + "\t"
-						+ rs.getString("age") + rs.getString("link")); */
+				/*
+				 * System.out.println(rs.getInt("id") + "\t" +
+				 * rs.getString("name") + "\t" + rs.getString("summ") // + "\t"
+				 * + rs.getString("picture") + "\t" + rs.getString("age") +
+				 * rs.getString("link"));
+				 */
 				person.id = rs.getInt("id");
 				person.name = rs.getString("name");
 				person.age = rs.getString("age");
 				person.summ = rs.getString("summ");
 				person.link = rs.getString("link");
 				person.picture = rs.getBytes("picture");
-				person.pictureLink = rs.getString("picturelink").replace("news-m", "child-badge");
+				person.pictureLink = rs.getString("picturelink").replace(
+						"news-m", "child-badge");
 			}
 		} catch (SQLException | MalformedURLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -90,7 +91,7 @@ public class ServGetPerson extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		 handleRequest(request, response);
+		handleRequest(request, response);
 	}
 
 	/**
@@ -107,128 +108,84 @@ public class ServGetPerson extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String paramName = "id";
 		String paramValue = request.getParameter(paramName);
-		if (paramValue == null) paramValue = "27897";
+		if (paramValue == null)
+			paramValue = "27897";
 		Person person = queryPersonByID(Integer.parseInt(paramValue));
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();		
-		out.println("<html> <link rel='stylesheet' href='stylesheet.css'><head><title>Фонд 'Подари жизнь'</title></head>" +
-"<body>"+ 
-"<p><a href='https://podari-zhizn.ru'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/logo.png' alt='' title=''></a></p>"+
-"<p><a href='https://donate.podari-zhizn.ru/' class='abold'>Благотворительный фонд 'Подари жизнь' примет Вашу помощь.</a></p>"+
-"<hr><h1 class='node-title'>");
+		PrintWriter out = response.getWriter();
+		out.println("<html><head>"				
+				+ GetCSS() 
+				//<link rel='stylesheet' href='stylesheet.css'>
+				+"<title>Фонд 'Подари жизнь'</title></head>"
+				+ "<body>"
+				+ "<p><a href='https://podari-zhizn.ru'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/logo.png' alt='' title=''></a></p>"
+				+ "<p><a href='https://donate.podari-zhizn.ru/' class='abold'>Благотворительный фонд 'Подари жизнь' примет Вашу помощь.</a></p>"
+				+ "<hr><h1 class='node-title'>");
 		out.println(person.name);
 		out.println("</h1><hr>");
 		out.println("<div  class='intro'><table>"
-		+"<tr><th rowspan=3>"
-		+ String.format("<a href='%s'>", person.link)  
-		+ String.format("<img src='%s' alt='' title=''>", person.pictureLink)  
-		+ "</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
-		out.println(person.age); 
-		
-		String summ = person.summ.contains("Деньги собраны") ? person.summ + " А Вы можете помочь другим детям!" : person.summ;
-		out.println(
-		"</td></tr><tr><td>&nbsp</td><th>Необходима сумма:</th><td>"
-				+ summ
-		+ "</td></tr><tr>&nbsp<td></td><td>&nbsp</td><td>"
-		+ "<br><p><a href='https://donate.podari-zhizn.ru/' title='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
-		+ "</td></tr></table></div><hr>"
-		+ "<p><a href='https://donate.podari-zhizn.ru/'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/podari-zhizn-logo-people.png' alt='' title=''></a></p>"
+				+ "<tr><th rowspan=3>"
+				+ String.format("<a href='%s'>", person.link)
+				+ String.format("<img src='%s' alt='' title=''>",
+						person.pictureLink)
+				+ "</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
+		out.println(person.age);
 
-		+ "<div class='footer-info'>"
-		+ "<p>Фонд 'Подари жизнь' не имеет филиалов, отделений, представителей и волонтеров в регионах России.</p>"
-		+ "<p>Для обращения за помощью: заполните <a href='http://help.podari-zhizn.ru/'>форму</a>"
-		+ "<br>или пишите на <a href='mailto:help@podari-zhizn.ru'>help@podari-zhizn.ru</a></p>"
-		+ "<p class='footer-mail'>"
-		+ "<a href='mailto:info@podari-zhizn.ru'>info@podari-zhizn.ru</a>, <a href='mailto:info@donors.ru'>info@donors.ru</a></p>"
-		+ "<p class='footer-phone'>8-800-250-5222 (звонок из регионов бесплатный)</p>"
-		+ "<p class='footer-phone'>+7 (495) 995-31-05, +7 (495) 995-31-06 (факс)"
-		+ "<br>Для СМИ: +7 (495) 995-31-08 <a href='mailto:pressa@podari-zhizn.ru'>pressa@podari-zhizn.ru</a></p>"
-		+ "<p class='footer-address'>119048, г. Москва, ул. Доватора, д. 13, подъезд 2А</p>"
-		+ "<p>Часы работы офиса: по будням с 10:00 до 19:00 часов, без перерыва на обед. Выходные: суббота и воскресенье.</p>"
-		+ "<p class='footer-copyright'>© 2007-2016 <a href='http://podari-zhizn.ru'>Фонд «Подари жизнь», Инициативная группа «Доноры - детям»</a></p>"
-		+ "</div></body></html>" );
+		String summ = person.summ.contains("Деньги собраны") ? person.summ
+				+ " А Вы можете помочь другим детям!" : person.summ;
+		out.println("</td></tr><tr><td>&nbsp</td><th>Необходима сумма:</th><td>"
+				+ summ
+				+ "</td></tr><tr>&nbsp<td></td><td>&nbsp</td><td>"
+				+ "<br><p><a href='https://donate.podari-zhizn.ru/' title='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
+				+ "</td></tr></table></div><hr>"
+				+ "<p><a href='https://donate.podari-zhizn.ru/'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/podari-zhizn-logo-people.png' alt='' title=''></a></p>"
+
+				+ "<div class='footer-info'>"
+				+ "<p>Фонд 'Подари жизнь' не имеет филиалов, отделений, представителей и волонтеров в регионах России.</p>"
+				+ "<p>Для обращения за помощью: заполните <a href='http://help.podari-zhizn.ru/'>форму</a>"
+				+ "<br>или пишите на <a href='mailto:help@podari-zhizn.ru'>help@podari-zhizn.ru</a></p>"
+				+ "<p class='footer-mail'>"
+				+ "<a href='mailto:info@podari-zhizn.ru'>info@podari-zhizn.ru</a>, <a href='mailto:info@donors.ru'>info@donors.ru</a></p>"
+				+ "<p class='footer-phone'>8-800-250-5222 (звонок из регионов бесплатный)</p>"
+				+ "<p class='footer-phone'>+7 (495) 995-31-05, +7 (495) 995-31-06 (факс)"
+				+ "<br>Для СМИ: +7 (495) 995-31-08 <a href='mailto:pressa@podari-zhizn.ru'>pressa@podari-zhizn.ru</a></p>"
+				+ "<p class='footer-address'>119048, г. Москва, ул. Доватора, д. 13, подъезд 2А</p>"
+				+ "<p>Часы работы офиса: по будням с 10:00 до 19:00 часов, без перерыва на обед. Выходные: суббота и воскресенье.</p>"
+				+ "<p class='footer-copyright'>© 2007-2016 <a href='http://podari-zhizn.ru'>Фонд «Подари жизнь», Инициативная группа «Доноры - детям»</a></p>"
+				+ "</div></body></html>");
 	}
 
 	private String GetCSS()
 	{
-		return "<style='text/css'>{"
-		+ "body { " +								
-	margin-top: 0px;
-	margin-right: 10px;
-	margin-bottom: 5px;
-	margin-left: 30px;
-}
+		return "<style type='text/css'>"
+		+ "body { margin-top: 0px;	margin-right: 10px; margin-bottom: 5px;margin-left: 30px; }"
+		
++ "hr{ border: none;    background-color: #658ca1;    color: #658ca1;    height: 1px;    } "
 
-hr{
- border: none; 
-    background-color: #658ca1; 
-    color: #658ca1; 
-    height: 1px; 
-    }
++ ".node-title{border:none;margin:0;padding-bottom:0;margin-left:30px;padding-top:10px;"
++ "    font-size: 20px;font-family: Century Gothic,sans-serif;color: #658ca1;}"
 
-.node-title{border:none;margin:0;padding-bottom:0;margin-left:30px;padding-top:10px;
-    font-size: 20px;font-family: Century Gothic,sans-serif;color: #658ca1;
-}
-
-.intro table {
-	text-align: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	color: #626262;
-	padding: 30px;
-}
++ ".intro table {	text-align: left;	font-family: Arial, Helvetica, sans-serif;"
++ "	font-size: 13px;	color: #626262;	padding: 30px;}"
     
-.intro th {
-	    font-weight: normal;	    
-}
++ ".intro th {	    font-weight: normal;}"
     
-.intro td {
-	    font-weight: bold;	    
-}
++ ".intro td {	    font-weight: bold;}"
     
-a
-{
-	color: #4F5Cff;
-	text-decoration:none;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-}
++ "a{	color: #4F5Cff;	text-decoration:none;	font-family: Arial, Helvetica, sans-serif;	font-size: 13px;}"
 
-a:visited {
-	text-decoration:none;
-	color: #4F5Cff;
-}
++ "a:visited {	text-decoration:none;	color: #4F5Cff;}"
 
-a:hover {
-	text-decoration:underline;
-}
++ "a:hover {	text-decoration:underline;}"
    
-.abold {
-	font-family: Helvetica;
-	font-size: 18px;
-	font-weight: bold;	
-	font-style: italic;    	
-}
++ ".abold {	font-family: Helvetica;	font-size: 18px;	font-weight: bold;	font-style: italic;}"
 
-.abutton {
-	font-family: Helvetica;
-	font-size: 15px;
-	font-weight: bold;	
-	font-style: italic;    	
-}
++ ".abutton {	font-family: Helvetica;	font-size: 15px;	font-weight: bold;	font-style: italic;}"
 
-.footer-info{
-	color: #a1a0a0;
-    font-size: 12px;
-}
++ ".footer-info{	color: #a1a0a0;    font-size: 12px;}"
 
-.footer-info a{
-	color: navy;
-    font-size: 12px;
-	text-decoration:underline;
-}
-"
-		+ "}</style>";
++ ".footer-info a{	color: navy;    font-size: 12px;	text-decoration:underline;}"
+		+ "</style>";
 	}
 }
