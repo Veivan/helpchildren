@@ -3,7 +3,7 @@ body {
 	margin-top: 0px;
 	margin-right: 10px;
 	margin-bottom: 5px;
-	margin-left: 10px;
+	margin-left: 30px;
 }
 
 hr{
@@ -13,7 +13,7 @@ hr{
     height: 1px; 
     }
 
-.node-title{border:none;margin:0;padding-bottom:0;margin-left:29px;padding-top:10px;
+.node-title{border:none;margin:0;padding-bottom:0;margin-left:40px;padding-top:10px;
     font-size: 20px;font-family: Century Gothic,sans-serif;color: #658ca1;
 }
 
@@ -22,7 +22,7 @@ hr{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #626262;
-	padding: 50px;
+	padding: 40px;
 }
     
 .intro th {
@@ -34,6 +34,7 @@ hr{
 }
     
 input {
+	margin-top: 30px;
 	border-width: 1px; 
 }
 
@@ -54,9 +55,11 @@ a:hover {
 	text-decoration:underline;
 }
    
-.abold{
-	font-size: 15px;
-	font-weight: bold;	    	
+.abold {
+	font-family: Helvetica;
+	font-size: 18px;
+	font-weight: bold;	
+	font-style: italic;    	
 }
 
 .footer-info{
