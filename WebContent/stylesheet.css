@@ -1,5 +1,4 @@
 body {
-	background-color: #EDF2EC;
 	margin-top: 0px;
 	margin-right: 10px;
 	margin-bottom: 5px;
@@ -13,7 +12,7 @@ hr{
     height: 1px; 
     }
 
-.node-title{border:none;margin:0;padding-bottom:0;margin-left:40px;padding-top:10px;
+.node-title{border:none;margin:0;padding-bottom:0;margin-left:30px;padding-top:10px;
     font-size: 20px;font-family: Century Gothic,sans-serif;color: #658ca1;
 }
 
@@ -22,7 +21,7 @@ hr{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #626262;
-	padding: 40px;
+	padding: 30px;
 }
     
 .intro th {
@@ -33,11 +32,6 @@ hr{
 	    font-weight: bold;	    
 }
     
-input {
-	margin-top: 30px;
-	border-width: 1px; 
-}
-
 a
 {
 	color: #4F5Cff;
@@ -58,6 +52,13 @@ a:hover {
 .abold {
 	font-family: Helvetica;
 	font-size: 18px;
+	font-weight: bold;	
+	font-style: italic;    	
+}
+
+.abutton {
+	font-family: Helvetica;
+	font-size: 15px;
 	font-weight: bold;	
 	font-style: italic;    	
 }

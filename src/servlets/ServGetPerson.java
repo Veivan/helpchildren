@@ -107,30 +107,48 @@ public class ServGetPerson extends HttpServlet {
 		String paramName = "id";
 		String paramValue = request.getParameter(paramName);
 		if (paramValue == null) paramValue = "27897";
-		String name = queryPersonByID(Integer.parseInt(paramValue)).name; 
+		Person person = queryPersonByID(Integer.parseInt(paramValue));
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<html>" +		
-			"<link rel=\"stylesheet\" href=\"stylesheet.css\">" + 
-			"<link rel=\"css_1\" href=\"css_1.css\">" + 
-			"<link rel=\"css_2\" href=\"css_2.css\">" + 
-			"<link rel=\"css_3\" href=\"css_3.css\">"  
-				);
-
-		out.println("<head>");
-		out.println("<title>Фонд \"Подари жизнь\"</title>");
-		out.println("</head>");
-		
-		out.println("<body>");
+		out.println("<html> <link rel='stylesheet' href='stylesheet.css'><head><title>Фонд 'Подари жизнь'</title></head>" +
+"<body>"+ 
+"<p><a href='https://podari-zhizn.ru'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/logo.png' alt='' title=''></a></p>"+
+"<p><a href='https://donate.podari-zhizn.ru/' class='abold'>Благотворительный фонд 'Подари жизнь' примет Вашу помощь.</a></p>"+
+"<hr><h1 class='node-title'>");
+		out.println(person.name);
+		out.println("</h1><hr>");
 		out.println(
-		"<div class=\"node node-child\">" +
-	      "<h1 class=\"node-title\"> Полина  Асеева </h1>	  </div> " );
+"<div  class='intro'><table>"
+		+"<tr><th rowspan=3>"
+		+ String.format("<a href='%s'>", "https://podari-zhizn.ru/main/node/27897")  //person.link
+		+ "<img src='https://podari-zhizn.ru/sites/default/files/imagecache/child-badge/dsc_1298.jpg' alt='' title='' width='192' height='160'>"+
+			"</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
+		out.println(person.age); //	18 лет
+		out.println(
+		"</td></tr><tr><td>&nbsp</td><th>Необходима сумма:</th><td>"
+		+ "Деньги собраны, но Вы можете помочь другим детям"
+		+ "</td></tr><tr>&nbsp<td></td><td>&nbsp</td><td>"
+		+ "<br><p><a href='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
 
-		out.println("<h1>Hello World!</h1>");
-		out.println(paramValue + " : " +  name);
-		out.println("</body>");
-		out.println("</html>");
+		//+ "<input class='topmenu' type='submit' value='Помочь на сайте фонда' title='https://donate.podari-zhizn.ru/'"
+		//+ "onclick='return location.href = 'https://donate.podari-zhizn.ru/'' autofocus>"
+		+ "</td></tr></table></div><hr>"
+		+ "<p><a href='https://donate.podari-zhizn.ru/'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/podari-zhizn-logo-people.png' alt='' title=''></a></p>"
 
+		+ "<div class='footer-info'>"
+		+ "<p>Фонд 'Подари жизнь' не имеет филиалов, отделений, представителей и волонтеров в регионах России.</p>"
+		+ "<p>Для обращения за помощью: заполните <a href='http://help.podari-zhizn.ru/'>форму</a>"
+		+ "<br>или пишите на <a href='mailto:help@podari-zhizn.ru'>help@podari-zhizn.ru</a></p>"
+		+ "<p class='footer-mail'>"
+		+ "<a href='mailto:info@podari-zhizn.ru'>info@podari-zhizn.ru</a>, <a href='mailto:info@donors.ru'>info@donors.ru</a></p>"
+		+ "<p class='footer-phone'>8-800-250-5222 (звонок из регионов бесплатный)</p>"
+		+ "<p class='footer-phone'>+7 (495) 995-31-05, +7 (495) 995-31-06 (факс)"
+		+ "<br>Для СМИ: +7 (495) 995-31-08 <a href='mailto:pressa@podari-zhizn.ru'>pressa@podari-zhizn.ru</a></p>"
+		+ "<p class='footer-address'>119048, г. Москва, ул. Доватора, д. 13, подъезд 2А</p>"
+		+ "<p>Часы работы офиса: по будням с 10:00 до 19:00 часов, без перерыва на обед. Выходные: суббота и воскресенье.</p>"
+		+ "<p class='footer-copyright'>© 2007-2016 <a href='http://podari-zhizn.ru'>Фонд «Подари жизнь», Инициативная группа «Доноры - детям»</a></p>"
+		+ "</div></body></html>" );
 	}
 
 }
