@@ -49,7 +49,7 @@ public class ServGetPerson extends HttpServlet {
 
 	private Person queryPersonByID(int id) {
 		Person person = new Person();
-		String sql = "SELECT id, name, summ, link, age, picture FROM persons WHERE id=?";
+		String sql = "SELECT id, name, summ, link, age, picture, picturelink FROM persons WHERE id=?";
 		ResultSet rs = null;
 		try (Connection conn = connect();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -58,16 +58,17 @@ public class ServGetPerson extends HttpServlet {
 			rs = pstmt.executeQuery();
 			// loop through the result set
 			while (rs.next()) {
-				System.out.println(rs.getInt("id") + "\t"
+				/*System.out.println(rs.getInt("id") + "\t"
 						+ rs.getString("name") + "\t" + rs.getString("summ")
 						// + "\t" + rs.getString("picture") + "\t"
-						+ rs.getString("age") + rs.getString("link"));
+						+ rs.getString("age") + rs.getString("link")); */
 				person.id = rs.getInt("id");
 				person.name = rs.getString("name");
 				person.age = rs.getString("age");
 				person.summ = rs.getString("summ");
 				person.link = rs.getString("link");
 				person.picture = rs.getBytes("picture");
+				person.pictureLink = rs.getString("picturelink").replace("news-m", "child-badge");
 			}
 		} catch (SQLException | MalformedURLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -118,22 +119,19 @@ public class ServGetPerson extends HttpServlet {
 "<hr><h1 class='node-title'>");
 		out.println(person.name);
 		out.println("</h1><hr>");
-		out.println(
-"<div  class='intro'><table>"
+		out.println("<div  class='intro'><table>"
 		+"<tr><th rowspan=3>"
 		+ String.format("<a href='%s'>", person.link)  
-		+ String.format("<<img src='%s' alt='' title='' width='192' height='160'>", 
-				"https://podari-zhizn.ru/sites/default/files/imagecache/child-badge/dsc_1298.jpg")  
+		+ String.format("<img src='%s' alt='' title=''>", person.pictureLink)  
 		+ "</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
 		out.println(person.age); 
+		
+		String summ = person.summ.contains("Деньги собраны") ? person.summ + " А Вы можете помочь другим детям!" : person.summ;
 		out.println(
 		"</td></tr><tr><td>&nbsp</td><th>Необходима сумма:</th><td>"
-		+ "Деньги собраны, но Вы можете помочь другим детям"
+				+ summ
 		+ "</td></tr><tr>&nbsp<td></td><td>&nbsp</td><td>"
 		+ "<br><p><a href='https://donate.podari-zhizn.ru/' title='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
-
-		//+ "<input class='topmenu' type='submit' value='Помочь на сайте фонда' title='https://donate.podari-zhizn.ru/'"
-		//+ "onclick='return location.href = 'https://donate.podari-zhizn.ru/'' autofocus>"
 		+ "</td></tr></table></div><hr>"
 		+ "<p><a href='https://donate.podari-zhizn.ru/'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/podari-zhizn-logo-people.png' alt='' title=''></a></p>"
 
