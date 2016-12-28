@@ -121,15 +121,16 @@ public class ServGetPerson extends HttpServlet {
 		out.println(
 "<div  class='intro'><table>"
 		+"<tr><th rowspan=3>"
-		+ String.format("<a href='%s'>", "https://podari-zhizn.ru/main/node/27897")  //person.link
-		+ "<img src='https://podari-zhizn.ru/sites/default/files/imagecache/child-badge/dsc_1298.jpg' alt='' title='' width='192' height='160'>"+
-			"</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
-		out.println(person.age); //	18 лет
+		+ String.format("<a href='%s'>", person.link)  
+		+ String.format("<<img src='%s' alt='' title='' width='192' height='160'>", 
+				"https://podari-zhizn.ru/sites/default/files/imagecache/child-badge/dsc_1298.jpg")  
+		+ "</a></th></tr><tr><td>&nbsp</td><th>Возраст:</th><td>");
+		out.println(person.age); 
 		out.println(
 		"</td></tr><tr><td>&nbsp</td><th>Необходима сумма:</th><td>"
 		+ "Деньги собраны, но Вы можете помочь другим детям"
 		+ "</td></tr><tr>&nbsp<td></td><td>&nbsp</td><td>"
-		+ "<br><p><a href='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
+		+ "<br><p><a href='https://donate.podari-zhizn.ru/' title='https://donate.podari-zhizn.ru/' class='abutton'>Помочь на сайте фонда</a></p>"
 
 		//+ "<input class='topmenu' type='submit' value='Помочь на сайте фонда' title='https://donate.podari-zhizn.ru/'"
 		//+ "onclick='return location.href = 'https://donate.podari-zhizn.ru/'' autofocus>"
