@@ -117,7 +117,9 @@ public class ServGetPerson extends HttpServlet {
 		out.println("<html><head>"				
 				+ GetCSS() 
 				//<link rel='stylesheet' href='stylesheet.css'>
-				+"<title>Фонд 'Подари жизнь'</title></head>"
+				+"<title>Фонд 'Подари жизнь'</title>"				
+				+ "<!-- Yandex.Metrika counter --> <script type='text/javascript'> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter41924134 = new Ya.Metrika({ id:41924134, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName('script')[0], s = d.createElement('script'), f = function () { n.parentNode.insertBefore(s, n); }; s.type = 'text/javascript'; s.async = true; s.src = 'https://mc.yandex.ru/metrika/watch.js'; if (w.opera == '[object Opera]') { d.addEventListener('DOMContentLoaded', f, false); } else { f(); } })(document, window, 'yandex_metrika_callbacks'); </script> <noscript><div><img src='https://mc.yandex.ru/watch/41924134' style='position:absolute; left:-9999px;' alt='' /></div></noscript> <!-- /Yandex.Metrika counter -->"
+				+ "</head>"
 				+ "<body>"
 				+ "<p><a href='https://podari-zhizn.ru'><img src='https://podari-zhizn.ru/sites/all/themes/giftoflife/logo.png' alt='' title=''></a></p>"
 				+ "<p><a href='https://donate.podari-zhizn.ru/' class='abold'>Благотворительный фонд 'Подари жизнь' примет Вашу помощь.</a></p>"
