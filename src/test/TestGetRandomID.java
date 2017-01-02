@@ -9,7 +9,7 @@ public class TestGetRandomID {
 
 	public static void main(String[] args) throws Exception {
 		//final String url = "http://localhost:8080/HelpChildren/getrandomid";
-		final String url = "http://helpchildren.online/HelpChildren/getrandomid";
+		final String url = "http://helpchildren.online/getrandomid";
 
 		System.out.println(GetPageContent(url));
 
