@@ -11,7 +11,18 @@
     <servlet-name>servgetperson</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  
+    <!-- servlet>
+    <description>Getting random ID</description>
+    <display-name>getrandomid</display-name>
+    <servlet-name>getrandomid</servlet-name>
+    <servlet-class>servlets.GetRandomID</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getrandomid</servlet-name>
+    <url-pattern>/getrandomid</url-pattern>
+  </servlet-mapping-->
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
