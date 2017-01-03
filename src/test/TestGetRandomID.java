@@ -5,14 +5,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONObject;
+
 public class TestGetRandomID {
 
 	public static void main(String[] args) throws Exception {
-		//final String url = "http://localhost:8080/HelpChildren/getrandomid";
-		final String url = "http://helpchildren.online/getrandomid";
+		final String url = "http://localhost:8080/HelpChildren/getrandomid";
+		//final String url = "http://helpchildren.online/getrandomid";
 
-		System.out.println(GetPageContent(url));
-
+		String page = GetPageContent(url);
+		System.out.println(page);
+		JSONObject json = new JSONObject(page);
+		int id = json.getInt("id");
+		System.out.println(""+id);
+		String picenc = json.getString("picture");
+		System.out.println(picenc);
 	}
 
 	public static String GetPageContent(String url_string) throws Exception {

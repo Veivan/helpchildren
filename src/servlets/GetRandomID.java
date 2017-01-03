@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +38,15 @@ public class GetRandomID extends HttpServlet {
 		int id = dbConn.queryRandomID();
 		
 		Person person = dbConn.queryPersonByID(id);
-		String json = String.format("{\"id\":\"%d\"}", person.id);
+		
+		byte[] encodedBytes = Base64.getEncoder().encode(person.picture);
+
+		String json = String.format("{\"id\":\"%d\", \"picture\":\"%s\"}", person.id, new String(encodedBytes));
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		
-		//{"title":"Конференция","date":"2014-11-30T12:00:00.000Z"}
+		//pw.print(String.format("<img src='data:image/gif;base64,%s' alt='Larry' />", new String(encodedBytes)));
+		
 		pw.print(json);
 		pw.close();
 	}
