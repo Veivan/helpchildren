@@ -41,7 +41,8 @@ public class GetRandomID extends HttpServlet {
 		
 		byte[] encodedBytes = Base64.getEncoder().encode(person.picture);
 
-		String json = String.format("{\"id\":\"%d\", \"picture\":\"%s\"}", person.id, new String(encodedBytes));
+		String json = String.format("{\"id\":\"%d\", \"name\":\"%s\", \"age\":\"%s\", \"picture\":\"%s\"}", 
+				person.id, person.name, person.age, new String(encodedBytes));
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		
