@@ -2,12 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -31,60 +25,6 @@ public class ServGetPerson extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Connection connect() throws MalformedURLException,
-			ClassNotFoundException {
-		Class.forName("org.sqlite.JDBC");
-		String url = "jdbc:sqlite:"
-				+ this.getServletContext().getRealPath("/WEB-INF/test.db");
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(url);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return conn;
-	}
-
-	private Person queryPersonByID(int id) {
-		Person person = new Person();
-		String sql = "SELECT id, name, summ, link, age, picture, picturelink FROM persons WHERE id=?";
-		ResultSet rs = null;
-		try (Connection conn = connect();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			pstmt.setInt(1, id);
-			rs = pstmt.executeQuery();
-			// loop through the result set
-			while (rs.next()) {
-				/*
-				 * System.out.println(rs.getInt("id") + "\t" +
-				 * rs.getString("name") + "\t" + rs.getString("summ") // + "\t"
-				 * + rs.getString("picture") + "\t" + rs.getString("age") +
-				 * rs.getString("link"));
-				 */
-				person.id = rs.getInt("id");
-				person.name = rs.getString("name");
-				person.age = rs.getString("age");
-				person.summ = rs.getString("summ");
-				person.link = rs.getString("link");
-				person.picture = rs.getBytes("picture");
-				person.pictureLink = rs.getString("picturelink").replace(
-						"news-m", "child-badge");
-			}
-		} catch (SQLException | MalformedURLException | ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return person;
-	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -105,12 +45,16 @@ public class ServGetPerson extends HttpServlet {
 
 	public void handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
+		
+		String path2db = this.getServletContext().getRealPath(dbConnector.dbname);
+		dbConnector dbConn = new dbConnector(path2db);
+
 		response.setContentType("text/html;charset=utf-8");
 		String paramName = "id";
 		String paramValue = request.getParameter(paramName);
 		if (paramValue == null)
 			paramValue = "27897";
-		Person person = queryPersonByID(Integer.parseInt(paramValue));
+		Person person = dbConn.queryPersonByID(Integer.parseInt(paramValue));
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();

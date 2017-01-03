@@ -2,14 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class GetRandomID
+ * Получает из БД случайный ID и соответствующую ему картинку в виде json
  */
 @WebServlet("/getrandomid")
 public class GetRandomID extends HttpServlet {
@@ -38,51 +31,19 @@ public class GetRandomID extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		String path2db = this.getServletContext().getRealPath(dbConnector.dbname);
+		dbConnector dbConn = new dbConnector(path2db);
+		int id = dbConn.queryRandomID();
+		
+		Person person = dbConn.queryPersonByID(id);
+		String json = String.format("{\"id\":\"%d\"}", person.id);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pw = response.getWriter();
-		pw.print(queryRandomID());
+		
+		//{"title":"Конференция","date":"2014-11-30T12:00:00.000Z"}
+		pw.print(json);
 		pw.close();
-	}
-
-	private int queryRandomID() {
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		Random random = new Random();
-		String sql = "SELECT id FROM persons";
-		ResultSet rs = null;
-		try (Connection conn = connect();
-			Statement stmt = conn.createStatement()) {
-			rs = stmt.executeQuery(sql);
-			// loop through the result set
-			while (rs.next()) {
-				list.add(rs.getInt("id"));
-			}
-		} catch (SQLException | MalformedURLException | ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		int index = random.nextInt(list.size());
-		return list.get(index);
-	}
-
-	private Connection connect() throws MalformedURLException,
-			ClassNotFoundException {
-		Class.forName("org.sqlite.JDBC");
-		String url = "jdbc:sqlite:"
-				+ this.getServletContext().getRealPath("/WEB-INF/test.db");
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(url);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return conn;
 	}
 
 }
