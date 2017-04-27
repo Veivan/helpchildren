@@ -10,8 +10,8 @@ import org.json.JSONObject;
 public class TestGetRandomID {
 
 	public static void main(String[] args) throws Exception {
-		final String url = "http://localhost:8080/HelpChildren/getrandomid";
-		//final String url = "http://helpchildren.online/getrandomid";
+		//final String url = "http://localhost:8080/HelpChildren/getrandomid";
+		final String url = "http://helpchildren.online/getrandomid";
 
 		String page = GetPageContent(url);
 		System.out.println(page);
@@ -29,7 +29,7 @@ public class TestGetRandomID {
 			conn = (HttpURLConnection) new URL(url_string).openConnection();
 
 			BufferedReader rd = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
+					conn.getInputStream(), "UTF-8"));
 			String line = "";
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
